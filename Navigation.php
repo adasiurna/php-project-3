@@ -4,7 +4,7 @@ require_once 'ActiveRecord.php';
 
 class Navigation extends ActiveRecord
 {
-    protected static $tableName = 'page';    
+    protected static $tableName = 'navigation';    
     protected static $columns = [
         'page_id',
         'title'

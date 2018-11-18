@@ -14,7 +14,7 @@ abstract class ActiveRecord
 
     public function __construct()
     {
-        if (empty(self::$columns)) {
+        if (empty(static::$columns)) {
             throw new \Exception('columns field cannot be empty');
         }
 
@@ -24,7 +24,7 @@ abstract class ActiveRecord
     public function save(): bool
     {
         $values = [];
-        $parameters = self::$columns;
+        $parameters = static::$columns;
         foreach ($parameters as &$parameter) {
             if (property_exists($this, $parameter)) {
                 $values[$parameter]= $this->$parameter;
@@ -36,7 +36,7 @@ abstract class ActiveRecord
         }
 
 
-        $query = self::$pdo->prepare("INSERT INTO {self::$tableName}(" . implode(self::$columns, ', ') . ") VALUES (" . implode($parameters, ',') . ")");
+        $query = self::$pdo->prepare("INSERT INTO {static::$tableName}(" . implode(static::$columns, ', ') . ") VALUES (" . implode($parameters, ',') . ")");
         $result = $query->execute();
         if ($result) {
             $insertedId = self::$pdo->lastInsertId();
@@ -48,11 +48,11 @@ abstract class ActiveRecord
 
     public static function findOne(int $id): array
     {
-        if (empty(self::$columns)) {
+        if (empty(static::$columns)) {
             throw new \Exception('columns field cannot be empty');
         }
 
-        $query = self::$pdo->prepare("SELECT id," . implode(self::$columns, ', ') . " FROM " . self::$tableName . " WHERE id = :id ");
+        $query = self::$pdo->prepare("SELECT id," . implode(static::$columns, ', ') . " FROM " . static::$tableName . " WHERE id = :id ");
         $query->execute(['id' => $id]);
 
         return $query->fetch();
@@ -65,11 +65,12 @@ abstract class ActiveRecord
 
     public static function findAll(): array
     {
-        if (empty(self::$columns)) {
+        self::loadDatabase();
+        if (empty(static::$columns)) {
             throw new \Exception('columns field cannot be empty');
         }
 
-        $query = self::$pdo->prepare("SELECT id," . implode(self::$columns, ', ') . " FROM " . self::$tableName);
+        $query = self::$pdo->prepare("SELECT id," . implode(static::$columns, ', ') . " FROM " . static::$tableName);
         $query->execute();
 
         return $query->fetchAll();
