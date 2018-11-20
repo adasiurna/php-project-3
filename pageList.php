@@ -26,7 +26,7 @@ var_dump($pages);
         <td>
             <form method="POST" action="deletePage.php">
                 <input type="submit" value="Delete" />
-                <input type="hidden" value="<?php $page->getId(); ?>" />
+                <input name="id" type="hidden" value="<?php echo $page->getId(); ?>" />
             </form>
             <a href="editPage.php?id=<?php echo $page->getId(); ?>">Edit</a>
         </td>
