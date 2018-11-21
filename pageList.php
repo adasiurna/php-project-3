@@ -29,6 +29,7 @@ var_dump($pages);
                 <input name="id" type="hidden" value="<?php echo $page->getId(); ?>" />
             </form>
             <a href="editPage.php?id=<?php echo $page->getId(); ?>">Edit</a>
+            <a href="viewPage.php?id=<?php echo $page->getId(); ?>">View</a>
         </td>
     </tr>
     <?php } ?>
