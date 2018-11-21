@@ -10,6 +10,9 @@ var_dump($pages);
 <html>
 <body>
     <h1>All pages</h1>
+    <p>
+        <a href="createPage.php">Create new page</a>
+    </p>
     <table border="4">
     <tr>
         <th>Id</th>

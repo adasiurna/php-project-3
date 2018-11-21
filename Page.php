@@ -8,6 +8,7 @@ class Page extends ActiveRecord
     protected $heading;
     protected $content;
     protected $created;
+    protected $sort;
 
     /**
      * Get the value of heading
@@ -92,5 +93,25 @@ class Page extends ActiveRecord
         }
         
         return $result;
+    }
+
+    /**
+     * Get the value of sort
+     */ 
+    public function getSort()
+    {
+        return $this->sort;
+    }
+
+    /**
+     * Set the value of sort
+     *
+     * @return  self
+     */ 
+    public function setSort($sort)
+    {
+        $this->sort = $sort;
+
+        return $this;
     }
 }
