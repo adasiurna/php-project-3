@@ -18,6 +18,6 @@ if (!$page instanceof Page) {
 <html>
 <body>
 <h1><?php echo $page->getHeading(); ?></h1>
-<p><?php echo $page->getContent(); ?></p>
+<p><?php echo nl2br(htmlspecialchars($page->getContent())); ?></p>
 </body>
 </html>

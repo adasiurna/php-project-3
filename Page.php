@@ -73,10 +73,11 @@ class Page extends ActiveRecord
     public function save(): bool
     {
         if (!$this->id) {
-            $query = self::$pdo->prepare('INSERT INTO ' . self::$tableName . '(heading, content) VALUES(:heading, :content)');
+            $query = self::$pdo->prepare('INSERT INTO ' . self::$tableName . '(heading, content, sort) VALUES(:heading, :content, :sort)');
             $result = $query->execute([
                 'heading' => $this->heading,
-                'content' => $this->content
+                'content' => $this->content,
+                'sort' => $this->sort
             ]);
     
             if ($result) {
@@ -93,6 +94,16 @@ class Page extends ActiveRecord
         }
         
         return $result;
+    }
+
+    public static function findAllSorted()
+    {
+        self::loadDatabase();
+        $query = self::$pdo->prepare("SELECT * FROM page ORDER BY sort DESC");
+        $query->setFetchMode(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE, static::class);
+        $query->execute();
+
+        return $query->fetchAll();
     }
 
     /**

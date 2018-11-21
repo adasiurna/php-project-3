@@ -12,6 +12,8 @@ class Navigation extends ActiveRecord
     public function setTitle($title)
     {
         $this->title = $title;
+
+        return $this;
     }
 
     public function setPageId($pageId)
