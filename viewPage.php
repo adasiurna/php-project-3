@@ -12,12 +12,10 @@ if (!$page instanceof Page) {
     header('Location:home.php');
     die();
 }
-
+include 'header.php';
 ?>
-
-<html>
-<body>
+<div class="container">
 <h1><?php echo $page->getHeading(); ?></h1>
 <p><?php echo nl2br(htmlspecialchars($page->getContent())); ?></p>
-</body>
-</html>
+</div>
+<?php include 'includes/footer.php'; ?>

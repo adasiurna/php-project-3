@@ -23,6 +23,8 @@
         header('Location:pageList.php');
         die();
     }
+
+    include 'header.php';
 ?>
 <form method="POST">
     <div>
@@ -47,5 +49,7 @@
         <input type="submit" />
     </div>
 </form>
-</body>
-</html>
+
+<?php 
+include 'includes/footer.php';
+?>

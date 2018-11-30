@@ -85,10 +85,11 @@ class Page extends ActiveRecord
                 $this->id = $insertedId;
             }
         } else {
-            $query = self::$pdo->prepare('UPDATE ' . self::$tableName . ' SET heading=:heading, content=:content WHERE id=:id');
+            $query = self::$pdo->prepare('UPDATE ' . self::$tableName . ' SET heading=:heading, content=:content, sort=:sort WHERE id=:id');
             $result = $query->execute([
                 'heading' => $this->heading,
                 'content' => $this->content,
+                'sort' => $this->sort,
                 'id' => $this->id
             ]);
         }

@@ -5,17 +5,15 @@ ini_set('display_errors', 1);
 require_once 'Page.php';
 require_once 'Navigation.php';
 
-$pages = Page::findAllSorted();
+$pageItems = Page::findAllSorted();
 $navigationItems = Navigation::findAll();
-?>
 
-<html>
-<body>
-    <h1>All pages</h1>
-    <p>
-        <a href="createPage.php">Create new page</a>
-    </p>
-    <table border="4">
+include 'header.php';
+?>
+<div class="container">
+    <h1>All pages <a style="font-size: 24px;" href="createPage.php"> | Create new page |</a> </h1>
+    
+    <table class="table table-hover table-sm">
     <tr>
         <th>Id</th>
         <th>Heading</th>
@@ -23,31 +21,28 @@ $navigationItems = Navigation::findAll();
         <th>Sort</th>
         <th>Actions</th>
     </tr>
-    <?php foreach ($pages as $page) { ?>
+    <?php foreach ($pageItems as $pageItem) { ?>
     <tr>
-        <td><?php echo $page->getId(); ?></td>
-        <td><?php echo $page->getHeading(); ?></td>
+        <td><?php echo $pageItem->getId(); ?></td>
+        <td><?php echo $pageItem->getHeading(); ?></td>
 
-        <td><?php echo $page->getCreated(); ?></td>
-        <td><?php echo $page->getSort(); ?></td>
+        <td><?php echo $pageItem->getCreated(); ?></td>
+        <td><?php echo $pageItem->getSort(); ?></td>
         <td>
+            <a href="editPage.php?id=<?php echo $pageItem->getId(); ?>">Edit</a>
+            <a href="viewPage.php?id=<?php echo $pageItem->getId(); ?>">View</a>
             <form method="POST" action="deletePage.php">
                 <input type="submit" value="Delete" />
-                <input name="id" type="hidden" value="<?php echo $page->getId(); ?>" />
+                <input name="id" type="hidden" value="<?php echo $pageItem->getId(); ?>" />
             </form>
-            <a href="editPage.php?id=<?php echo $page->getId(); ?>">Edit</a>
-            <a href="viewPage.php?id=<?php echo $page->getId(); ?>">View</a>
         </td>
     </tr>
     <?php } ?>
     </table>
 
 
-    <h1>Navigation</h1>
-    <p>
-        <a href="createNavigation.php">Create new navigation item</a>
-    </p>
-    <table border="4">
+    <h1>Navigation <a style="font-size: 24px;" href="createNavigation.php"> | Create new navigation item |</a></h1>
+    <table class="table table-hover table-sm">
     <tr>
         <th>Id</th>
         <th>Page id</th>
@@ -61,16 +56,14 @@ $navigationItems = Navigation::findAll();
 
         <td><?php echo $navigationItem->getTitle(); ?></td>
         <td>
-            <form method="POST" action="deletePage.php">
+            <a href="editNavigation.php?id=<?php echo $navigationItem->getId(); ?>">Edit</a>
+            <form method="POST" action="deleteNavigation.php">
                 <input type="submit" value="Delete" />
                 <input name="id" type="hidden" value="<?php echo $navigationItem->getId(); ?>" />
             </form>
-            <a href="editNavigation.php?id=<?php echo $navigationItem->getId(); ?>">Edit</a>
-            <a href="viewNavigation.php?id=<?php echo $navigationItem->getId(); ?>">View</a>
         </td>
     </tr>
     <?php } ?>
     </table>
-
-</body>
-</html>
+</div>
+<?php include 'includes/footer.php'; ?>
