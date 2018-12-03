@@ -35,7 +35,7 @@ include 'header.php';
 </form>
 </div>
 
-<?php include 'includes/footer.php';
+<?php include 'footer.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     require_once 'Page.php';

@@ -11,4 +11,4 @@ include 'header.php';
     <h1><?php echo $page->getHeading(); ?></h1>
     <p><?php echo $page->getContent(); ?></p>
 </div>
-<?php include 'includes/footer.php'?>
+<?php include 'footer.php'?>

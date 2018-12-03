@@ -66,4 +66,4 @@ include 'header.php';
     <?php } ?>
     </table>
 </div>
-<?php include 'includes/footer.php'; ?>
+<?php include 'footer.php'; ?>
